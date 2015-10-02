@@ -122,8 +122,7 @@ function nggallery_manage_gallery_main() {
 	//-->
 	</script>
 	<div class="wrap">
-		<?php screen_icon( 'nextgen-gallery' ); ?>
-		<h2><?php echo _e( 'Galleries', 'nggallery');?> 
+		<h2><?php _e( 'Galleries', 'nggallery');?>
 			<form id="addgalleries" class="nggform add-new-form" method="POST" action="<?php echo $ngg->manage_page->base_page . '&amp;paged=' . $_GET['paged']; ?>" accept-charset="utf-8"><?php if ( current_user_can('NextGEN Upload images') && nggGallery::current_user_can( 'NextGEN Add new gallery' ) ) : ?>
 					<input name="doaction" class="add-new-h2" type="submit" onclick="showAddGallery(); return false;" value="<?php _e('Add new gallery', 'nggallery') ?>"/>
 			<?php endif; ?></form></h2>
@@ -361,30 +360,31 @@ if($gallerylist) {
 }
 
 /**
- * Construtor class to create the table layout
+ * Constructor class to create the table layout
  *
  * @package WordPress
  * @subpackage List_Table
  * @since 1.8.0
  * @access private
+ * 20150907: changes on WP_List_Table for WP 4.3.0 breaks code for List Tables. Fixed.
  */
 class _NGG_Galleries_List_Table extends WP_List_Table {
-	var $_screen;
+	var $screen;
 	var $_columns;
 
 	function _NGG_Galleries_List_Table( $screen ) {
 		if ( is_string( $screen ) )
 			$screen = convert_to_screen( $screen );
 
-		$this->_screen = $screen;
+		$this->screen = $screen;
 		$this->_columns = array() ;
 
 		add_filter( 'manage_' . $screen->id . '_columns', array( &$this, 'get_columns' ), 0 );
 	}
 
 	function get_column_info() {
-		$columns = get_column_headers( $this->_screen );
-		$hidden = get_hidden_columns( $this->_screen );
+		$columns = get_column_headers( $this->screen );
+		$hidden = get_hidden_columns( $this->screen );
 		$_sortable = $this->get_sortable_columns();
 
 		foreach ( $_sortable as $id => $data ) {
@@ -398,7 +398,11 @@ class _NGG_Galleries_List_Table extends WP_List_Table {
 			$sortable[$id] = $data;
 		}
 
+		if (method_exists($this,"get_primary_column_name")){ //works for WP 4.3.0 and up
+			return array( $columns, $hidden, $sortable, $this->get_primary_column_name() );
+		}
 		return array( $columns, $hidden, $sortable );
+
 	}
 
     // define the columns to display, the syntax is 'internal name' => 'display name'

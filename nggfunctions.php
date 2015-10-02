@@ -106,7 +106,11 @@ function nggShowSlideshow( $galleryID, $args = null) {
     $out .= '>';
 	
 	foreach ( $images as $image ) {
-        $out .= '<img src="' . $image->imageURL .'" alt="' . $image->alttext . '" >';
+        if( !$param['autodim'] ) {
+            $out .=  '<img src="' . $image->imageURL .'" alt="' . $image->alttext . '" style="max-width: ' .  $param['width'] . 'px; max-height: ' . $param['height'] . 'px; width: auto; height:auto; margin:auto">';
+        } else {
+            $out .= '<img src="' . $image->imageURL .'" alt="' . $image->alttext . '" >';
+        }
 	}
 	
     $out .= '</div></div>'."\n";
@@ -115,7 +119,7 @@ function nggShowSlideshow( $galleryID, $args = null) {
 			var owl = $('#" . $param['anchor'] . "');
 			owl.owlCarousel({
 				items: 1,
-				autoHeight: true,";
+				autoHeight: " . var_export($param['autodim'], true) . ",";
 	if ( $param['nav'] ) {
 		$out .= "nav: true,
 				navText: ['" . __('previous', 'nggallery') ."','" . __('next', 'nggallery') ."'],";
@@ -544,7 +548,7 @@ function nggCreateAlbum( $galleriesID, $template = 'extend', $album = 0) {
 				$pageid = (isset($subalbum->pageid) ? $subalbum->pageid : 0);
 				$galleries[$key]->pagelink = ($pageid > 0) ? get_permalink($pageid) : $nggRewrite->get_permalink($args);
 				$galleries[$key]->galdesc = html_entity_decode ( nggGallery::i18n($subalbum->albumdesc) );
-				$galleries[$key]->title = html_entity_decode ( nggGallery::i18n($subalbum->name) );
+				$galleries[$key]->title = esc_attr(html_entity_decode ( nggGallery::i18n($subalbum->name) ));
 			}
         }
 		elseif (isset($unsort_galleries[$key])) {
@@ -581,10 +585,10 @@ function nggCreateAlbum( $galleriesID, $template = 'extend', $album = 0) {
 			}
 
 			// description can contain HTML tags
-			$galleries[$key]->galdesc = html_entity_decode ( nggGallery::i18n( stripslashes($galleries[$key]->galdesc), 'gal_' . $galleries[$key]->gid . '_description') ) ;
+			$galleries[$key]->galdesc = html_entity_decode ( nggGallery::i18n( stripslashes($galleries[$key]->galdesc), 'gal_' . $galleries[$key]->gid . '_description') );
 
 			// i18n
-			$galleries[$key]->title = html_entity_decode ( nggGallery::i18n( stripslashes($galleries[$key]->title), 'gal_' . $galleries[$key]->gid . '_title') ) ;
+			$galleries[$key]->title = esc_attr( html_entity_decode( nggGallery::i18n( $galleries[$key]->title, 'gal_' . $galleries[$key]->gid . '_title' ) ) );
 		}
 
         // apply a filter on gallery object before the output
