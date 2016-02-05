@@ -100,7 +100,7 @@ function ngg_upgrade() {
  */
 function nggallery_upgrade_page()  {
 
-    $filepath = admin_url() . 'admin.php?page=' . $_GET['page']; //default upgrade path
+	$filepath = admin_url() . 'admin.php?page=' . $_GET['page']; //default upgrade path
 	if ( is_network_admin() ) {                                  //unless if it is network  administrator...
 		$filepath = network_admin_url() . 'admin.php?page=' . $_GET['page'];
 	}
@@ -123,7 +123,7 @@ function nggallery_upgrade_page()  {
 		<a class="button button-primary"
 		   href="<?php echo $filepath; ?>&amp;upgrade=now"><?php _e( 'Start upgrade now', 'nggallery' ); ?></a>
 	</div>
-<?php
+	<?php
 }
 
 /**
@@ -150,7 +150,7 @@ function doing_update_output( $filepath ) {
 		<br/><a class="finished button button-primary"
 		        href="<?php echo $filepath; ?>"><?php _e( 'Continue to NextCellent', 'nggallery' ); ?></a>
 	</div>
-<?php
+	<?php
 }
 
 ?>
