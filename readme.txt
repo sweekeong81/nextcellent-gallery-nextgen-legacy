@@ -332,7 +332,7 @@ Yes, since we use Javascript rather than flash, NextCellent Gallery is compatibl
 
 == Changelog ==
 
-= 1.9.31 - 2016-09-05 = FIX
+= 1.9.31 - 2016-02-05 = FIX
 
 * Added more help documentation
 * Fix Add new page button
