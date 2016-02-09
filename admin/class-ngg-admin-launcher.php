@@ -262,7 +262,7 @@ class NGG_Admin_Launcher {
 			return;
 		}
 
-		wp_register_script( 'ngg-ajax', NGGALLERY_URLPATH . 'admin/js/ngg.ajax.js', array( 'jquery' ), '1.4.1' );
+		wp_register_script( 'ngg-ajax', plugins_url( 'js/ngg.ajax.js', __FILE__), array( 'jquery' ), '1.4.1' );
 		wp_localize_script( 'ngg-ajax', 'nggAjaxSetup', array(
 			'url'        => admin_url( 'admin-ajax.php' ),
 			'action'     => 'ngg_ajax_operation',
@@ -271,8 +271,7 @@ class NGG_Admin_Launcher {
 			'error'      => __( 'Unexpected Error', 'nggallery' ),
 			'failure'    => __( 'A failure occurred', 'nggallery' )
 		) );
-		wp_register_script( 'ngg-plupload-handler', NGGALLERY_URLPATH . 'admin/js/plupload.handler.js',
-			array( 'plupload-all' ), '0.0.1' );
+		wp_register_script( 'ngg-plupload-handler', plugins_url( 'js/plupload.handler.js', __FILE__), array( 'plupload-all' ), '0.0.1' );
 		wp_localize_script( 'ngg-plupload-handler', 'pluploadL10n', array(
 			'queue_limit_exceeded'      => __( 'You have attempted to queue too many files.' ),
 			'file_exceeds_size_limit'   => __( 'This file exceeds the maximum upload size for this site.' ),
@@ -296,10 +295,9 @@ class NGG_Admin_Launcher {
 			'error_uploading'           => __( '&#8220;%s&#8221; has failed to upload due to an error' ),
 			'no_gallery'                => __( 'You didn\'t select a gallery!', 'nggallery' )
 		) );
-		wp_register_script( 'ngg-progressbar', NGGALLERY_URLPATH . 'admin/js/ngg.progressbar.js', array( 'jquery' ),
+		wp_register_script( 'ngg-progressbar', plugins_url( 'js/ngg.progressbar.js', __FILE__), array( 'jquery' ),
 			'2.0.1' );
-		wp_register_script( 'ngg-autocomplete', NGGALLERY_URLPATH . 'admin/js/ngg.autocomplete.js',
-			array( 'jquery-ui-autocomplete' ), '1.1' );
+		wp_register_script( 'ngg-autocomplete', plugins_url( 'js/ngg.autocomplete.js', __FILE__ ), array( 'jquery-ui-autocomplete' ), '1.1' );
 
 		switch ( $_GET['page'] ) {
 			case NGGFOLDER :
@@ -314,8 +312,8 @@ class NGG_Admin_Launcher {
 				wp_enqueue_script( 'jquery-ui-sortable' );
 				wp_enqueue_script( 'jquery-ui-datepicker' );
 				wp_enqueue_script( 'ngg-autocomplete' );
-				wp_enqueue_script( 'ngg-cropper', NGGALLERY_URLPATH . 'admin/js/cropper/cropper.js', '0.10.0' );
-				wp_register_script( 'shutter', NGGALLERY_URLPATH . 'shutter/shutter-reloaded.js', false, '1.3.2' );
+				wp_enqueue_script( 'ngg-cropper', plugins_url('js/cropper/cropper.min.js', __FILE__), '2.2.5' );
+				wp_register_script( 'shutter', plugins_url('shutter/shutter-reloaded.js', __DIR__), false, '1.3.2' );
 				wp_localize_script( 'shutter', 'shutterSettings', array(
 					'msgLoading' => __( 'L O A D I N G', 'nggallery' ),
 					'msgClose'   => __( 'Click to Close', 'nggallery' ),
@@ -339,8 +337,7 @@ class NGG_Admin_Launcher {
 				wp_enqueue_script( 'ngg-ajax' );
 				wp_enqueue_script( 'ngg-progressbar' );
 				wp_enqueue_script( 'jquery-ui-dialog' );
-				wp_enqueue_script( 'jqueryFileTree', NGGALLERY_URLPATH . 'admin/js/jqueryFileTree/jqueryFileTree.js',
-					array( 'jquery' ), '1.0.1' );
+				wp_enqueue_script( 'jqueryFileTree', plugins_url( 'js/jqueryFileTree/jqueryFileTree.js', __FILE__), array( 'jquery' ), '1.0.1' );
 				break;
 			case "nggallery-style" :
 				wp_enqueue_script( 'codepress' );
@@ -353,8 +350,8 @@ class NGG_Admin_Launcher {
 	 * Load the CSS files.
 	 */
 	public function load_styles() {
-		wp_register_style( 'nggadmin', NGGALLERY_URLPATH . 'admin/css/nggadmin.css', false, '2.8.1', 'screen' );
-		wp_register_style( 'ngg-jqueryui', NGGALLERY_URLPATH . 'admin/css/jquery.ui.css', false, '1.8.5', 'screen' );
+		wp_register_style( 'nggadmin', plugins_url( 'css/nggadmin.css', __FILE__), false, '2.8.1', 'screen' );
+		wp_register_style( 'ngg-jqueryui', plugins_url( 'css/jquery.ui.css', __FILE__), false, '1.8.5', 'screen' );
 
 		// no need to go on if it's not a plugin page
 		if ( ! isset( $_GET['page'] ) ) {
@@ -368,20 +365,19 @@ class NGG_Admin_Launcher {
 				break;
 			case "nggallery-add-gallery" :
 				wp_enqueue_style( 'ngg-jqueryui' );
-				wp_enqueue_style( 'jqueryFileTree', NGGALLERY_URLPATH . 'admin/js/jqueryFileTree/jqueryFileTree.css',
-					false, '1.0.1', 'screen' );
+				wp_enqueue_style( 'jqueryFileTree', plugins_url( 'js/jqueryFileTree/jqueryFileTree.css', __FILE__), false, '1.0.1', 'screen' );
 			case "nggallery-options" :
-				wp_enqueue_style( 'nggtabs', NGGALLERY_URLPATH . 'admin/css/jquery.ui.tabs.css', false, '2.5.0',
+				wp_enqueue_style( 'nggtabs', plugins_url( 'css/jquery.ui.tabs.css', __FILE__), false, '2.5.0',
 					'screen' );
 				wp_enqueue_style( 'nggadmin' );
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_style( 'ngg-jqueryui' );
 				break;
 			case "nggallery-manage":
-				wp_enqueue_style( 'ngg-cropper', NGGALLERY_URLPATH . 'admin/js/cropper/cropper.min.css', '0.10.0' );
-				wp_enqueue_style( 'shutter', NGGALLERY_URLPATH . 'shutter/shutter-reloaded.css', false, '1.3.2',
+				wp_enqueue_style( 'ngg-cropper', plugins_url( 'js/cropper/cropper.min.css', __FILE__), '2.2.5' );
+				wp_enqueue_style( 'shutter', plugins_url('shutter/shutter-reloaded.css', __DIR__), false, '1.3.2',
 					'screen' );
-				wp_enqueue_style( 'datepicker', NGGALLERY_URLPATH . 'admin/css/jquery.ui.datepicker.css', false,
+				wp_enqueue_style( 'datepicker', plugins_url('css/jquery.ui.datepicker.css', __FILE__), false,
 					'1.8.2', 'screen' );
 			case "nggallery-roles" :
 			case "nggallery-manage-album" :
@@ -524,18 +520,73 @@ class NGG_Admin_Launcher {
 						'default' => 50,
 						'option'  => 'ngg_images_per_page'
 					);
+
+					$help = '<p>' . __( 'This box contains information and the various options a gallery had.', 'nggallery') . '</p>';
+
+					$screen->add_help_tab( array(
+						'id'      => $screen->id . '-general',
+						'title'   => __( 'Overview', 'nggallery'),
+						'content' => $help
+					) );
+
+					$help = '<p>' . __( 'Manage a single gallery and the images it contains:', 'nggallery' ) . '</p>';
+					$help .= '<dl class="ncg-dl">';
+
+					$help .= '<dt>' . __( 'Title', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'The title of the gallery. This can be visible to the users of the website. This has no effect on the gallery path.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Description', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'The description of the gallery. Albums using the "extend" template may display this on the website. The description cannot contain HTML.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Path', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'The path on the server to the folder containing this gallery. If you change this, NextCellent will not move the gallery for you.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Gallery ID', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'The internal ID used by NextCellent to represent this gallery. This information can be useful for developers. A gallery ID should never change.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Page Link', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'With this option you can select the behavior when an user clicks on a gallery in an album. If the option is set to "not linked", the gallery will be displayed on the same page. If you do select a page, the user will be redirected to that page.', 'nggallery');
+					$help .= ' '. sprintf( __( 'More information about this is available on this webpage: %s', 'nggallery'), '<a target="_blank" href="http://www.nextgen-gallery.com/link-to-page/">' . __('page', 'nggallery') . '</a>') . '</dd>';
+
+					$help .= '<dt>' . __( 'Preview image', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'This image will be shown when the gallery is shown on the website and it needs a preview, e.g. an album. If you do not select a preview image, NextCellent will use the last uploaded image of the gallery.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Author', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'The user who created this gallery.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Create new page', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'This will create a new page with the same name as the gallery, and include a shortcode for this gallery in it.', 'nggallery') .'</dd>';
+					$help .= '</dl>';
+
+					$screen->add_help_tab( array(
+						'id'      => $screen->id . '-options',
+						'title'   => __( 'Gallery settings', 'nggallery'),
+						'content' => $help
+					) );
+
+					$help = '<p>' . __( 'There are three buttons:', 'nggallery') . '</p>';
+					$help .= '<dl class="ncg-dl">';
+
+					$help .= '<dt>' . __( 'Sort gallery', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'Allows you to manually set the order of the images in the gallery. This will only be enabled if you have selected the option "Custom sort order" in the NextCellent settings.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Scan folder for new images', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'Scan the folder (the path of the gallery) for new images and add them to the gallery. <strong>Warning!</strong> This will normalize and rename the images that are added, e.g. spaces are removed.', 'nggallery') .'</dd>';
+
+					$help .= '<dt>' . __( 'Save', 'ngallery') . '</dt>';
+					$help .= '<dd>' . __( 'Save changes you have made to the gallery options.', 'nggallery') .'</dd>';
+
+					$help .= '</dl>';
+
+					$screen->add_help_tab( array(
+						'id'      => $screen->id . '-buttons',
+						'title'   => __( 'Buttons', 'nggallery'),
+						'content' => $help
+					) );
 				}
 
 				$screen->add_option( $option, $args );
 
-
-				$help = '<p>' . __( 'Manage your images and galleries.', 'nggallery' ) . '</p>';
-
-				$screen->add_help_tab( array(
-					'id'      => $screen->id . '-general',
-					'title'   => 'Manage everything',
-					'content' => $help
-				) );
 				break;
 			case "{$i18n}_page_nggallery-manage-album" :
 				$help = '<p>' . __( 'Organize your galleries into albums.',
