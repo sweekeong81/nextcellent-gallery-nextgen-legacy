@@ -45,7 +45,7 @@ class NGG_Options extends NGG_Post_Admin_Page {
 			check_admin_referer('ngg_settings');
 			// get the hidden option fields, taken from WP core
 			if ( $_POST['page_options'] ) {
-				$options = explode( ',', stripslashes( $_POST['page_options'] ) );
+				$options = explode( ',', stripslashes( sanitize_title($_POST['page_options'] )) );
 			} else {
 				$options = false;
 			}
@@ -55,7 +55,7 @@ class NGG_Options extends NGG_Post_Admin_Page {
 					$option = trim($option);
 					$value = false;
 					if ( isset( $_POST[ $option ] ) ) {
-						$value = trim( $_POST[ $option ] );
+						$value = sanitize_title( $_POST[ $option ] );
 						if ($value === "true") {
 							$value = true;
 						}

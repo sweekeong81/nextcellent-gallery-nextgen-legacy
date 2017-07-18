@@ -106,9 +106,9 @@ class NGG_Style extends NGG_Post_Admin_Page {
 
 		if ( isset( $_POST['activate'] ) ) {
 			check_admin_referer('ngg_style');
-			$file = $_POST['css'];
-			$activate = $_POST['activateCSS']; 
-			
+			$file = sanitize_text_field($_POST['css']);
+			$activate = sanitize_text_field($_POST['activateCSS']);
+
 			// save option now
 			$ngg->options['activateCSS'] = $activate;
 			$ngg->options['CSSfile'] = $file;
@@ -129,8 +129,8 @@ class NGG_Style extends NGG_Post_Admin_Page {
 				{wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this blog.').'</p>');}
 
 			$newcontent = stripslashes($_POST['newcontent']);
-			$old_path = $_POST['file'];
-			$folder = $_POST['folder'];
+			$old_path = sanitize_title($_POST['file']);
+			$folder = sanitize_title($_POST['folder']);
 			
 			//if the file is in the css folder, copy it.
 			if ($folder === 'css') {
@@ -168,7 +168,7 @@ class NGG_Style extends NGG_Post_Admin_Page {
 			if ( !current_user_can('edit_themes') )
 				{wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this blog.').'</p>');}
 			
-			$old_path = $_POST['oldpath'];
+			$old_path = sanitize_text_field($_POST['oldpath']);
 			$new_path = NGG_CONTENT_DIR . "/ngg_styles/nggallery.css";
 			
 			//check for duplicate files
