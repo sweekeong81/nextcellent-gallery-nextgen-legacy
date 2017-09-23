@@ -5,7 +5,7 @@ Plugin URI: http://www.wpgetready.com/nextcellent-gallery
 Description: A Photo Gallery for WordPress providing NextGEN legacy compatibility from version 1.9.13
 Author: WPGReady, Niknetniko based on Alex Rabe & PhotoCrati work.
 Author URI: http://www.wpgetready.com
-Version: 1.9.32
+Version: 1.9.33
 
 Copyright (c) 2007-2011 by Alex Rabe & NextGEN DEV-Team
 Copyright (c) 2012 Photocrati Media
@@ -53,7 +53,7 @@ if (!class_exists('nggLoader')) {
      */
     class nggLoader {
 
-		var $version = '1.9.32';
+		var $version = '1.9.33';
 		var $dbversion   = '1.8.3';
 		var $minimum_WP  = '4.0';
 		var $options     = '';
@@ -63,7 +63,7 @@ if (!class_exists('nggLoader')) {
         /**
          * class constructor
          */
-        function nggLoader() {
+        function __construct() {
 
 			// Stop the plugin if we missed the requirements
 			if ( ( !$this->required_version() ) || ( !$this->check_memory_limit() )  )
@@ -185,16 +185,14 @@ if (!class_exists('nggLoader')) {
         /**
          * Look for XML request
          * @param $wp
+         * 20170920: Deprecated imagerotator.php
          */
         function check_request( $wp ) {
 
 			if ( !array_key_exists('callback', $wp->query_vars) )
 				return;
 
-			if ( $wp->query_vars['callback'] == 'imagerotator') {
-				require_once (dirname (__FILE__) . '/xml/imagerotator.php');
-				exit();
-			}
+
 
 			if ( $wp->query_vars['callback'] == 'json') {
 				require_once (dirname (__FILE__) . '/xml/json.php');

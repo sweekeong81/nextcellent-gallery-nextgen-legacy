@@ -5,10 +5,8 @@
  */
 function ngg_upgrade() {
 
-	global $wpdb, $user_ID;
+	global $wpdb;
 
-	// get the current user ID
-	get_currentuserinfo();
 
 	// in multisite environment the pointer $wpdb->nggpictures need to be set again
 	$wpdb->nggpictures = $wpdb->prefix . 'ngg_pictures';
@@ -75,6 +73,8 @@ function ngg_upgrade() {
 			$ngg_options['irNumber']         = 20;
 			$ngg_options['irClick']          = true;
 			$ngg_options['silentUpgrade']    = false;
+			$ngg_options['thumbDifferentSize'] = false;
+
 
 			//Convert color
 			$ngg_options['wmColor'] = '#' . $ngg_options['wmColor'];

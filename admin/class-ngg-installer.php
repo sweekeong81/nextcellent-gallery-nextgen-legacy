@@ -109,7 +109,7 @@ class NGG_Installer {
 		// check one table again, to be sure
 		if ( ! $wpdb->get_var( "SHOW TABLES LIKE '$nggpictures'" ) ) {
 			update_option( "ngg_init_check",
-				__( 'NextCellent Gallery : Tables could not created, please check your database settings',
+				__( 'NextCellent Gallery : Tables could not be created, please check your database settings',
 					"nggallery" ) );
 
 			return;
@@ -230,6 +230,8 @@ class NGG_Installer {
 			$ngg_options['gallerypath'] = str_replace( "%BLOG_ID%", $blog_id, $ngg_wpmu_options['gallerypath'] );
 			$ngg_options['CSSfile']     = $ngg_wpmu_options['wpmuCSSfile'];
 		}
+        $ngg_options['silentUpgrade']    = false;
+        $ngg_options['thumbDifferentSize']    = false;
 
 		update_option( 'ngg_options', $ngg_options );
 
