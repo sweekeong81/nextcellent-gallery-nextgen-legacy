@@ -907,7 +907,11 @@ class nggdb {
 
             // split the words it a array if separated by a space or comma
             preg_match_all('/".*?("|$)|((?<=[\\s",+])|^)[^\\s",+]+/', $request, $matches);
-            $search_terms = array_map(create_function('$a', 'return trim($a, "\\"\'\\n\\r ");'), $matches[0]);
+            $search_terms = array_map(
+              function($a) {
+                return trim($a, "\"\'\n\r ");
+              },
+              $matches[0]);
 
             $n = '%';
             $searchand = '';
@@ -967,7 +971,11 @@ class nggdb {
 
             // split the words it a array if separated by a space or comma
             preg_match_all('/".*?("|$)|((?<=[\\s",+])|^)[^\\s",+]+/', $request, $matches);
-            $search_terms = array_map(create_function('$a', 'return trim($a, "\\"\'\\n\\r ");'), $matches[0]);
+            $search_terms = array_map(
+              function ($a) {
+                return trim($a, "\"\'\n\r ");
+              },
+              $matches[0]);
 
             $n = '%';
             $searchand = '';
@@ -1015,7 +1023,11 @@ class nggdb {
 
             // split the words it a array if separated by a space or comma
             preg_match_all('/".*?("|$)|((?<=[\\s",+])|^)[^\\s",+]+/', $request, $matches);
-            $search_terms = array_map(create_function('$a', 'return trim($a, "\\"\'\\n\\r ");'), $matches[0]);
+            $search_terms = array_map(
+              function() {
+                return trim($a, "\"\'\n\r ");
+              },
+              $matches[0]);
 
             $n = '%';
             $searchand = '';

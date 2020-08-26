@@ -248,6 +248,6 @@ class NGG_Gallery_Widget extends WP_Widget {
 	}
 }
 
-add_action('widgets_init',
-	create_function('', 'return register_widget("NGG_Gallery_Widget");')
-);
+add_action('widgets_init', function() {
+  return register_widget("NGG_Gallery_Widget");
+});
