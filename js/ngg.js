@@ -84,8 +84,13 @@ function ngg_ajax_navigation(e, obj) {
 				jQuery("a.next").unbind("click");
 				
 				// add shutter-listeners again
-				shutterReloaded.init('sh');
-				
+				if (typeof shutterReloaded === 'object') {
+          shutterReloaded.init('sh');
+        }
+        else if (typeof custom_lightbox_init === 'function') {
+          // user implements this function to init custom lightbox 
+          custom_lightbox_init();
+        }
 				jQuery("a.page-numbers").click(function(e) {
 					return ngg_ajax_navigation(e, this);
 				});
