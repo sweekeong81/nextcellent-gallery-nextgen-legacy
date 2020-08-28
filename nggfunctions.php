@@ -257,6 +257,9 @@ function nggCreateGallery($picturelist, $galleryID = false, $template = '', $ima
     $nggpage  = get_query_var('nggpage');
     $pageid   = get_query_var('pageid');
     $pid      = get_query_var('pid');
+    if (empty($template) && !empty(get_query_var('template'))) {
+      $template = get_query_var('template');
+    }
 
     // in case of permalinks the pid is a slug, we need the id
     if( !is_numeric($pid) && !empty($pid) ) {

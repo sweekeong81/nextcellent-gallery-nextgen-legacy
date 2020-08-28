@@ -16,7 +16,7 @@ Follow variables are useable :
 ?>
 <?php if (!defined ('ABSPATH')) die ('No direct access allowed'); ?><?php if (!empty ($image)) : ?>
 
-<div class="ngg-imagebrowser" id="<?php echo $image->anchor ?>">
+<div class="ngg-imagebrowser" id="<?php echo $image->anchor ?>" data-template="caption">
 
 	<h3><?php echo $image->alttext ?></h3>
 

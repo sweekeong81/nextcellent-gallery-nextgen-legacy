@@ -19,6 +19,8 @@ switch ($_GET['type']) {
 		set_query_var('pageid', intval($_GET['p']));
 		set_query_var('show', 'gallery');
 		$GLOBALS['id'] = intval($_GET['p']);
+
+    set_query_var('template', strval($_GET['template']));
 		
 		echo nggShowGallery( intval($_GET['galleryid']) );
 		

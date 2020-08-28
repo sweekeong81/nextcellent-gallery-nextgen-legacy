@@ -17,7 +17,7 @@ Follow variables are useable :
 ?>
 <?php if (!defined ('ABSPATH')) die ('No direct access allowed'); ?><?php if (!empty ($gallery)) : ?>
 
-<div class="ngg-galleryoverview">
+<div class="ngg-galleryoverview" data-template="carousel">
 
 	<div class="pic"><img title="<?php echo $current->alttext ?>" alt="<?php echo $current->alttext ?>" src="<?php echo $current->url; ?>" /></div>
 	

@@ -64,11 +64,13 @@ function ngg_ajax_navigation(e, obj) {
 		if ( (galleryId.length == 0) || (postId.length == 0) ) {
 			return true;
 		}
-				
+		
+    var template = gallery.attr("data-template");
+
 		ngg_show_loading(e);
 		
 		// load gallery content
-		jQuery.get(ngg_ajax.callback, {p: postId, galleryid: galleryId, nggpage: pageNumber, type: "gallery"}, function (data, textStatus) {
+		jQuery.get(ngg_ajax.callback, {p: postId, galleryid: galleryId, nggpage: pageNumber, type: "gallery", template: template}, function (data, textStatus) {
 			
 			// delete old content
 			gallery.children().remove();
